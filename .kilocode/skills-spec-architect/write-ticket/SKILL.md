@@ -23,18 +23,7 @@ Each ticket must be a separate Markdown file named following this convention: `N
 
 ### Ticket Template
 
-Each generated file must follow this exact structure:
-
-1. **Summary/Goal**: A single sentence explaining the "What".
-2. **Context & Rationale**: The "Why" and the value of this specific task.
-3. **Requirements**: Exhaustive list of functional requirements.
-4. **Technical Constraints**: 
-   - Business objects definition (fields, types in plain text).
-   - Algorithms described in natural language.
-   - Architectural patterns to follow.
-5. **Dependencies & Blockers**: List everything that must be ready before starting.
-6. **Acceptance Criteria**: A precise checklist to validate the ticket.
-7. **Testing Strategy**: Description of required Unit Tests, Integration Tests, and manual test scenarios.
+Each generated file must follow the exact structure in `assets/ticket-template.md`
 
 ## Execution Workflow
 

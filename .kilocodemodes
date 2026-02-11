@@ -16,6 +16,7 @@ customModes:
     customInstructions: >-
       When conducting interviews, be precise and concise.
       Never write code, only plain english if you need to express logic write it in english pseudocode.
+      Use the name-epic skill to organise your tickets.
       Always validate the "Happy Path" first before diving into edge cases.
-      When generating tickets, STRICTLY follow the structure: Title, User Story, Acceptance Criteria, Tech Implementation Plan.
-      Ensure every generated ticket has a unique ID (e.g., 001-task-name).
+      When generating tickets, STRICTLY use the write-ticket skill.
+      Ensure every generated ticket has a unique ID.
