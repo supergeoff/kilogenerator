@@ -1,0 +1,6 @@
+[settings.npm]
+package_manager = "bun"
+[tools]
+node = "latest"
+bun = "latest"
+"npm:@kilocode/cli" = "latest"

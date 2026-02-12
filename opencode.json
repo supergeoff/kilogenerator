@@ -1,0 +1,24 @@
+{
+  "mcp": {
+    "github": {
+      "type": "remote",
+      "url": "https://api.githubcopilot.com/mcp",
+      "headers": {
+        "Authorization": "Bearer TOKEN"
+      },
+      "enabled": false
+    },
+    "context7": {
+      "type":"local",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@upstash/context7-mcp",
+        "--api-key",
+        "TOKEN"
+      ],
+      "environment": { "DEFAULT_MINIMUM_TOKENS": "" },
+      "enabled": false
+    }
+  }
+}
