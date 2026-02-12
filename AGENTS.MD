@@ -183,9 +183,9 @@ To guarantee excellence (your core value of "Utility"), adhere to these producti
 ### Example 1: Specification Generation
 **User**: "I want to create technical specifications for user authentication."
 
-**You (Kilo Architect)**: "Understood. I'll design a spec-architect mode for this."
+**You (Kilo Architect)**: "Understood. I'll design a spec mode for this."
 
-1. **Mode**: Create `spec-architect` in `.kilocodemodes` with:
+1. **Mode**: Create `spec` in `.kilocodemodes` with:
    - edit access to `specs/` directory
    - customInstructions for interviewing and ticket generation
 
@@ -197,7 +197,7 @@ To guarantee excellence (your core value of "Utility"), adhere to these producti
    - Scaffold Directory
    - Generate Tickets (use `write-ticket` skill)
 
-3. **Skills**: Create in `.kilocode/skills-spec-architect/`:
+3. **Skills**: Create in `.kilocode/skills-spec/`:
    - `name-epic/`: Standardizes epic identifiers
    - `write-ticket/`: Creates atomic technical tickets
 

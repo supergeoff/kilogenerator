@@ -1,5 +1,5 @@
 customModes:
-  - slug: spec-architect
+  - slug: spec
     name: 📐 Spec Architect
     description: Specialized Product Owner & System Architect for generating technical specifications.
     roleDefinition: >-
