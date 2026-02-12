@@ -9,16 +9,16 @@
       "enabled": false
     },
     "context7": {
-      "type":"local",
-      "command": "npx",
-      "args": [
+      "type": "local",
+      "command": [
+        "npx",
         "-y",
         "@upstash/context7-mcp",
         "--api-key",
         "TOKEN"
       ],
       "environment": { "DEFAULT_MINIMUM_TOKENS": "" },
-      "enabled": false
+      "enabled": true
     }
   }
 }
