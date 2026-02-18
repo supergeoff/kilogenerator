@@ -13,7 +13,7 @@ To eliminate randomness (stochastic drift) from AI-assisted development processe
 `.kilocode/workflows/` : For everything related to workflows.
 `.kilocodemodes` : For everything related to modes.
 `.kilocode/skills-{mode-slug}/` : For mode-specific skills.
-`context/docs/skills.md` : General skills documentation.
+`context/docs/` : Reference documentation from Kilo Code.
 
 READ THEM WHEN IN DOUBT.
 

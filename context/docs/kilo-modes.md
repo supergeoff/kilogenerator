@@ -3,6 +3,8 @@ title: "Custom Modes"
 description: "Create and configure custom modes in Kilo Code"
 ---
 
+> **Reference**: This is documentation from Kilo Code. Updated from source on 2026-02-18.
+
 # Custom Modes
 
 Kilo Code allows you to create **custom modes** to tailor Kilo's behavior to specific tasks or workflows. Custom modes can be either **global** (available across all projects) or **project-specific** (defined within a single project).

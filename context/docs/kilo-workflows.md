@@ -3,6 +3,8 @@ title: "Workflows"
 description: "Create automated workflows with Kilo Code"
 ---
 
+> **Reference**: This is documentation from Kilo Code. Updated from source on 2026-02-18.
+
 # Workflows
 
 Workflows automate repetitive tasks by defining step-by-step instructions for Kilo Code to execute. Invoke any workflow by typing `/[workflow-name.md]` in the chat.

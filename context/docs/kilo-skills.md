@@ -3,6 +3,8 @@ title: "Skills"
 description: "Extend Kilo Code capabilities with skills"
 ---
 
+> **Reference**: This is documentation from Kilo Code. Updated from source on 2026-02-18.
+
 # Skills
 
 Kilo Code implements [Agent Skills](https://agentskills.io/), a lightweight, open format for extending AI agent capabilities with specialized knowledge and workflows.

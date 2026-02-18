@@ -1,41 +1,41 @@
 ---
 name: update-context
-description: Met à jour le dossier context/ après implémentation. Active ce skill à la fin de chaque implémentation pour standardiser.
+description: Updates the context/ folder after implementation. Activate this skill at the end of each implementation to standardize.
 ---
 
 # Skill: Update Context
 
-## Objectif
+## Objective
 
-Maintenir `context/` comme source de vérité.
+Maintain `context/` as the source of truth.
 
-## Entrée
+## Input
 
-Reçoit du mode plan:
-- Plan validé
-- Exigences de mise à jour context
+Received from plan mode:
+- Validated plan
+- Context update requirements
 
 ## Actions
 
-### CRÉER (si context vide)
+### CREATE (if context empty)
 
-Créer structure initiale selon besoins projet.
+Create initial structure according to project needs.
 
-### AJOUTER
+### ADD
 
-Nouveaux patterns, conventions, décisions.
+New patterns, conventions, decisions.
 
-### MODIFIER
+### MODIFY
 
-Patterns existants qui ont évolué.
+Existing patterns that have evolved.
 
-### SUPPRIMER/REMPLACER
+### DELETE/REPLACE
 
-Patterns obsolètes ou remplacés.
+Obsolete or replaced patterns.
 
-## Règles
+## Rules
 
-1. Lire context/ existant
-2. Comparer avec code implémenté
-3. Appliquer les exigences reçues du plan
-4. Context = état actuel du code
+1. Read existing context/
+2. Compare with implemented code
+3. Apply requirements received from the plan
+4. Context = current state of the code

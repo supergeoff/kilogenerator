@@ -2,58 +2,73 @@
 name: develop
 ---
 
-# Workflow Développement Rigoureux
+# Develop Workflow (Orchestrator → Plan → Code)
 
-Tu es en MODE PLAN. Tu dois respecter ce workflow strict.
+You are executing the DEVELOP WORKFLOW. Follow this strict sequence.
 
-## Phase 1: Context Loading
+## Phase 1: Orchestrator Mode (Current)
 
-- Scanner `context/` à la racine du workspace
-- Lire tous les fichiers présents
-- Si inexistant/vide: noter "premier run"
+### 1.1 Context Loading
+- Scan `context/` directory at workspace root
+- Read all files present
+- If non-existent/empty: note "first run" and proceed
 
-## Phase 2: Codebase Analysis
+### 1.2 Codebase Analysis
+- Project structure (glob patterns)
+- Tech stack detection (package.json, requirements.txt, etc.)
+- Existing conventions and patterns
 
-- Structure projet (glob)
-- Stack technique (package.json, requirements.txt...)
-- Conventions via code existant
-- Patterns récurrents
+### 1.3 Questioning
+- Call the `questioning` skill
+- Ask EXACTLY 7 questions (3 choices + 1 free-form each)
+- Wait for ALL user responses before proceeding
 
-## Phase 3: Questionnement
+### 1.4 Transition to Plan Mode
+Call `new_task()` to architect mode with the following context:
+- Loaded context summary
+- User responses to questions
+- Original user request
+- Instruction: "Generate a structured implementation plan"
 
-- Appeler skill `questionnement`
-- 7 questions max, format 3 choix + libre
-- Attendre TOUTES les réponses
+## Phase 2: Plan Mode (Architect)
 
-## Phase 4: Plan Generation
+### 2.1 Plan Generation
+Produce a structured plan with:
+- **Objective**: Clear, measurable goal
+- **Steps**: Numbered implementation steps
+- **Files**: List of files to create/modify
+- **Context Requirements**: What to update in `context/` after implementation
+- **Risks**: Potential issues and mitigations
 
-Produire un plan avec:
-- Objectif clair
-- Étapes numérotées
-- Fichiers impactés
-- **Exigences update-context** (quoi mettre à jour dans context/)
-- Si premier run: création templates initiaux
+### 2.2 User Validation
+- Present the complete plan
+- Ask for explicit approval
+- Incorporate modifications if requested
+- Do NOT proceed without validation
 
-## Phase 5: Validation
+### 2.3 Transition to Code Mode
+After validation, call `new_task()` to code mode with:
+- Validated implementation plan
+- Context update requirements
+- Instruction: "Execute the plan and update context at the end"
 
-- Présenter plan + exigences context
-- Demander validation explicite
-- Intégrer modifications si demandées
+## Phase 3: Code Mode
 
-## Phase 6: Mode Switch
+### 3.1 Implementation
+- Execute each step of the validated plan
+- Write/modify files as specified
+- Follow existing project conventions
 
-Après validation:
-- Appeler new_task() vers mode code
-- Transmettre:
-  - Plan validé
-  - Exigences de mise à jour context
-- Le mode code:
-  - Exécute le plan
-  - Appelle skill update-context à la fin
+### 3.2 Context Update
+At completion, call the `update-context` skill:
+- Update `context/` with new patterns
+- Document decisions made
+- Record any deviations from the plan
 
-## Règles Absolues
+## Absolute Rules
 
-1. Aucun code en mode plan
-2. 7 questions max, 3 choix + 1 libre
-3. Validation explicite requise
-4. Passer les exigences context au mode code
+1. **No code in Orchestrator or Plan modes** - only analysis and planning
+2. **Exactly 7 questions** with 3 choices + free-form
+3. **Explicit validation required** before Code mode
+4. **Always update context** at the end of Code mode
+5. **Use `new_task()` for all mode transitions**
