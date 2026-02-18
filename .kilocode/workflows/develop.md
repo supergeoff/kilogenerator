@@ -52,7 +52,21 @@ After validation, call `new_task()` to code mode with:
 - Context update requirements
 - Instruction: "Execute the plan and update context at the end"
 
+### 2.4 Pre-Code Pause
+**⚠️ MODEL CHANGE OPPORTUNITY ⚠️**
+- STOP and wait for user confirmation before proceeding
+- Inform user: "Plan validated. This is your opportunity to change the model before coding begins."
+- Wait for explicit user signal to proceed (e.g., "proceed", "continue", "start coding")
+- Do NOT proceed to Phase 3 without user confirmation
+
 ## Phase 3: Code Mode
+
+### 3.0 Pre-Implementation Wait
+**⚠️ FINAL CONFIRMATION ⚠️**
+- Pause before any code execution
+- Prompt: "Ready to begin implementation. Change model now if desired, then confirm to proceed."
+- Wait for user confirmation signal
+- Only proceed to 3.1 after explicit user approval
 
 ### 3.1 Implementation
 - Execute each step of the validated plan
