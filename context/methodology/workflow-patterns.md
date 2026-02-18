@@ -22,6 +22,7 @@ Multi-phase workflows typically follow a pattern:
 - Analyze codebase structure and patterns
 - Gather requirements through questioning
 - Collect and synthesize user responses
+- **Persist to state file**
 
 ### Phase 2: Planning (Architect)
 
@@ -53,6 +54,63 @@ Call new_task() to target mode with:
 - Original request
 - Specific instruction
 ```
+
+## State Transmission Pattern
+
+For complex workflows requiring context persistence across phases, use a state file.
+
+### State File Location
+
+```
+.kilocode/.develop-state.json
+```
+
+### State Structure
+
+```json
+{
+  "workflow": "develop",
+  "phases": {
+    "orchestrator": {
+      "contextSummary": "...",
+      "codebaseAnalysis": "...",
+      "userResponses": []
+    },
+    "architect": {
+      "generatedPlan": "...",
+      "approvedPlan": "..."
+    },
+    "code": {
+      "implementation": "..."
+    }
+  },
+  "metadata": {
+    "created": "ISO timestamp",
+    "updated": "ISO timestamp"
+  }
+}
+```
+
+### Phase Operations
+
+| Phase | Operations |
+|-------|------------|
+| 1.1 Context Loading | WRITE: contextSummary |
+| 1.2 Codebase Analysis | WRITE: codebaseAnalysis |
+| 1.3 Questioning | READ: context, WRITE: userResponses |
+| 1.4 Transition | READ: full state for prompt |
+| 2.1 Plan Generation | READ: state, WRITE: generatedPlan |
+| 2.2 User Validation | UPDATE: approvedPlan |
+| 3.1 Implementation | READ: approvedPlan |
+| 3.2 Context Update | CLEAR: delete state file |
+
+### Best Practices
+
+1. **Always read state at phase start** - Don't assume state exists
+2. **Include timestamps** - Track when data was last updated
+3. **Clear on completion** - Avoid stale state for next workflow run
+4. **Handle missing file** - Create new state if needed
+5. **Use manage-state skill** - Standardized operations for state management
 
 ## Validation Requirements
 
