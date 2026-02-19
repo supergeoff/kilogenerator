@@ -4,11 +4,13 @@
 **Priority**: Low / Medium / High
 **Module**: [e.g., Checkout, User Profile, Search]
 
+⚠️ **NO CODE PERMITTED** - All technical requirements must be in natural language.
+
 ## 1. Context & Goal
 *A concise description of the functional need. Why are we doing this? What is the user value?*
 
 ## 2. Business Rules (The Logic)
-*Strict rules that must be enforced. No technical jargon.*
+*Strict rules that must be enforced. No technical jargon, no code syntax.*
 - [BR-01] New rule description...
 - [BR-02] Existing rule to respect...
 - [BR-03] Validation rule...
@@ -30,8 +32,8 @@
 *Explicitly state what this ticket does NOT cover to prevent scope creep.*
 
 ## 5. Technical Constraints
-- Business objects definition (fields, types in plain text).
-- Algorithms described in natural language.
+- Business objects definition: List fields and types in plain text (e.g., "Email is a mandatory unique string").
+- Algorithms: Described using bullet points in English.
 - Architectural patterns to follow.
 
 ## 6. Testing Strategy

@@ -28,3 +28,7 @@ This workflow guides the creation of precise technical tickets from a user brief
 6. **Generate Ticket Artifacts**
    - Command: ask `spec` to use `write-ticket`
    - Context: Use the synthesis from Step 4.
+
+7. **Final Validation**
+   - Command: ask `spec` to use `validate-ticket` on all generated files.
+   - Goal: Ensure 0% code syntax. If code is found, regenerate immediately.
