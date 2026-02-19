@@ -28,30 +28,37 @@ Read the entire state file or a specific key:
 - Read entire file: `read_state()` 
 - Read specific key: read `phases.orchestrator.contextSummary` etc.
 
-### WRITE
-Write a complete new state (replaces entire file):
+### WRITE / UPDATE `userResponses`
+
+When saving user responses, preserve the FULL context of the questioning:
+
 ```json
 {
-  "workflow": "develop",
   "phases": {
     "orchestrator": {
-      "contextSummary": "...",
-      "codebaseAnalysis": "...",
-      "userResponses": []
+      "userResponses": [
+        {
+          "q": "Q1: [Full Title]",
+          "context": "[The specific context provided for this question]",
+          "options": ["A", "B", "C"],
+          "answer": "[Selected label OR user's free-form text]",
+          "raw_response": "[If multiple choices were allowed or additional text provided]"
+        }
+      ]
     }
-  },
-  "metadata": {
-    "created": "ISO timestamp",
-    "updated": "ISO timestamp"
   }
 }
 ```
 
-### UPDATE
-Update a specific key while preserving other data:
-- Use JSON merge/patch logic
-- Preserve existing keys not being updated
-- Add timestamps to metadata
+**CRITICAL**: Do NOT summarize the responses into a simplified JSON. Keep the questions and answers verbatim to ensure no context is lost for the Architect phase.
+
+## Operations
+
+### APPEND_RESPONSE
+Add a single response to the `userResponses` array while preserving existing ones.
+
+### UPDATE_STATE
+Update any key in the state file. If updating `userResponses`, ensure it is an array of objects as defined above.
 
 ### CLEAR
 Delete the state file after workflow completion:

@@ -19,17 +19,25 @@ Identify gray areas by cross-referencing:
 - `codebaseAnalysis`: Analysis of project structure, tech stack, conventions
 - User's original request (from conversation)
 
-The skill must read this state file BEFORE generating questions. Questions should be contextualized based on:
-- What was found in the codebase
-- What patterns/conventions exist in the context
-- What gaps exist between user request and current project state
+The skill must read this state file BEFORE generating questions. Questions MUST be deeply contextualized:
+- Reference specific file paths and code patterns found in `codebaseAnalysis`.
+- Cross-reference with methodology patterns found in `contextSummary`.
+- Identify project-specific terminology and use it in the questions.
+- Address gaps between the request and the detected architecture.
 
 ## Question Format
 
-```
-**Q1: [Title]**
+Each question must be preceded by a **Context** block that explains why this question is being asked based on the analysis.
 
-[Context - reference specific findings from codebase]
+```
+**Q[X]: [Title]**
+
+**Context**: Based on findings in [specific files/patterns]:
+- Detected [Pattern A] in [File B]
+- Context/methodology specifies [Rule C]
+- This creates a choice regarding [Gap D]
+
+[Question Text]
 
 ○ Option A
 ○ Option B  
@@ -37,20 +45,10 @@ The skill must read this state file BEFORE generating questions. Questions shoul
 ○ Other (specify)
 ```
 
-## Process
-
-1. **READ** state file to understand full context
-2. Analyze the request against:
-   - Loaded context (contextSummary)
-   - Codebase analysis (codebaseAnalysis)
-   - User's original request
-3. Identify: edge cases, UX, performance, security, patterns, gaps
-4. Generate EXACTLY 7 questions that address these gaps
-
 ## Rules
 
-- EXACTLY 7 questions
-- ALWAYS 3 choices + 1 free-form
-- Questions must be contextualized using state file information
-- Each question adds value and addresses a specific gap
-- Reference specific findings from codebase analysis in question context
+- EXACTLY 7 questions.
+- ALWAYS 3 choices + 1 free-form (Other).
+- Questions MUST be contextualized using findings from the state file.
+- Do NOT ask generic questions (e.g., "What language do you use?") if the information is already in `codebaseAnalysis`.
+- Focus on architectural decisions, UX trade-offs, and implementation details.

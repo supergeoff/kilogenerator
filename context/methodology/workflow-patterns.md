@@ -10,11 +10,42 @@ description: "Patterns for structuring multi-phase development workflows"
 Multi-phase workflows typically follow a pattern:
 
 ```
-┌─────────────────┐     new_task()     ┌─────────────────┐     new_task()     ┌─────────────────┐
-│   ORCHESTRATOR  │ ─────────────────► │      PLAN       │ ─────────────────► │      CODE       │
-│                 │                    │                 │                    │                 │
-└─────────────────┘                    └─────────────────┘                    └─────────────────┘
-```
+┌─────────────────┐   STOP & VALIDATE   ┌─────────────────┐   STOP & VALIDATE   ┌─────────────────┐   STOP & VALIDATE   ┌──────────────┐
+│   ORCHESTRATOR  │ ──────────────────► │      PLAN       │ ──────────────────► │      CODE       │ ──────────────────► │  UPDATE CTX  │
+│                 │      User OK        │                 │      User OK        │                 │      User OK        │              │
+└─────────────────┘                     └─────────────────┘   + Model Switch    └─────────────────┘                     └──────────────┘
+
+### Phase 1: Analysis (Orchestrator)
+
+- Load context from project documentation
+- Analyze codebase structure and patterns
+- Gather requirements through **Contextualized Questioning**
+- **STOP**: Present gathered info and wait for user "continue"
+- Persist full Q&R verbatim to state file
+
+### Phase 2: Planning (Architect)
+
+- Receive full context from Orchestrator
+- Generate comprehensive plan
+- **STOP**: Present complete plan for user validation
+- **USER OPPORTUNITY**: Change model before coding
+- Iterate on feedback until approved
+
+### Phase 3: Implementation (Code)
+
+- Receive approved plan
+- Implement each step systematically
+- Follow project conventions
+- **STOP**: Present proposed context updates
+- Update context only after explicit approval
+
+## Mandatory Stops & Validation
+
+A workflow must never proceed automatically between major phases. User validation is required at each transition to ensure alignment and allow for model adjustments.
+
+1. **Post-Questioning**: Validate that the agent correctly understood the requirements.
+2. **Post-Planning**: Validate the technical approach and switch model if necessary.
+3. **Post-Implementation**: Validate what is persisted in the long-term context.
 
 ### Phase 1: Analysis (Orchestrator)
 

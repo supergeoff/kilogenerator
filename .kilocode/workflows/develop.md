@@ -26,60 +26,59 @@ You are executing the DEVELOP WORKFLOW. Follow this strict sequence.
 - **READ** state file to get contextSummary and codebaseAnalysis
 - Call the `questioning` skill with this context
 - The skill will read the state file and generate contextual questions
-- Ask EXACTLY 7 questions (3 choices + 1 free-form each)
+- Ask EXACTLY 7 questions using the `Question` tool
 - Wait for ALL user responses before proceeding
-- **SAVE** user responses to state file under `userResponses`
+- **SAVE** full user responses (verbatim) to state file under `userResponses`
+- **STOP**: Display a summary of all gathered information
+- **VALIDATION**: Ask: "Information gathered. Is this correct and complete? Type 'continue' to move to planning, or provide more details."
+- Do NOT proceed to Phase 1.4 without explicit "continue" or "proceed"
 
 ### 1.4 Transition to Plan Mode
-Call `new_task()` to architect mode with the following context:
-- **READ** state file and include full content in the prompt:
+- **READ** state file and include in the prompt:
   - contextSummary
   - codebaseAnalysis  
-  - userResponses
+  - full userResponses (verbatim)
 - Original user request
 - Instruction: "Generate a structured implementation plan"
+- Call `new_task()` to architect mode
 
 ## Phase 2: Plan Mode (Architect)
 
 ### 2.1 Plan Generation
 - **READ** state file to understand full context
-Produce a structured plan with:
-- **Objective**: Clear, measurable goal
-- **Steps**: Numbered implementation steps
-- **Files**: List of files to create/modify
-- **Context Requirements**: What to update in `context/` after implementation
-- **Risks**: Potential issues and mitigations
+- Produce a structured plan with:
+  - **Objective**: Clear, measurable goal
+  - **Steps**: Numbered implementation steps
+  - **Files**: List of files to create/modify
+  - **Context Requirements**: What to update in `context/` after implementation
+  - **Risks**: Potential issues and mitigations
 - **SAVE** generated plan to state file under `generatedPlan`
 
-### 2.2 User Validation
-- Present the complete plan
-- Ask for explicit approval
+### 2.2 User Validation & Model Change
+- **PRESENT** the complete, detailed plan
+- **STOP OBLIGATOIRE**
+- Display the following message:
+  """
+  ⚠️ **PLAN VALIDATION REQUIRED** ⚠️
+  
+  Please review the plan above.
+  - To approve and start coding: type **'continue'** or **'approved'**
+  - To change model for coding: **switch model now**, then type **'continue'**
+  - To modify the plan: describe your changes
+  """
+- Wait for explicit approval
 - Incorporate modifications if requested
 - **SAVE** approved plan to state file under `approvedPlan`
-- Do NOT proceed without validation
+- Do NOT proceed to Phase 2.3 without validation
 
 ### 2.3 Transition to Code Mode
-After validation, call `new_task()` to code mode with:
-- **READ** state file and include in prompt:
-  - approvedPlan
-  - context update requirements from the plan
-- Instruction: "Execute the plan and update context at the end"
-
-### 2.4 Pre-Code Pause
-**⚠️ MODEL CHANGE OPPORTUNITY ⚠️**
-- STOP and wait for user confirmation before proceeding
-- Inform user: "Plan validated. This is your opportunity to change the model before coding begins."
-- Wait for explicit user signal to proceed (e.g., "proceed", "continue", "start coding")
-- Do NOT proceed to Phase 3 without user confirmation
+- After validation, call `new_task()` to code mode with:
+  - **READ** state file and include in prompt:
+    - approvedPlan
+    - context update requirements from the plan
+- Instruction: "Execute the plan systematically. You MUST call update-context at the end."
 
 ## Phase 3: Code Mode
-
-### 3.0 Pre-Implementation Wait
-**⚠️ FINAL CONFIRMATION ⚠️**
-- Pause before any code execution
-- Prompt: "Ready to begin implementation. Change model now if desired, then confirm to proceed."
-- Wait for user confirmation signal
-- Only proceed to 3.1 after explicit user approval
 
 ### 3.1 Implementation
 - **READ** state file to get approvedPlan
@@ -87,11 +86,12 @@ After validation, call `new_task()` to code mode with:
 - Write/modify files as specified
 - Follow existing project conventions
 
-### 3.2 Context Update
-At completion, call the `update-context` skill:
-- Update `context/` with new patterns
-- Document decisions made
-- Record any deviations from the plan
+### 3.2 Context Update Validation
+- At completion, call the `update-context` skill
+- **STOP**: Present proposed context updates to the user
+- **VALIDATION**: Ask: "I have prepared the following context updates based on what was learned. Approve these changes? (yes/no/modify)"
+- Only apply changes after explicit approval
+- **DOCUMENT**: Record decisions made and any deviations
 - **CLEAR** state file after workflow completion
 
 ## State File Structure
